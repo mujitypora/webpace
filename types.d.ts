@@ -6266,6 +6266,11 @@ declare interface JavascriptParserOptions {
 	exprContextRequest?: string;
 
 	/**
+	 * Enable/Disable extracting source map.
+	 */
+	extractSourceMap?: boolean;
+
+	/**
 	 * Enable/disable parsing of EcmaScript Modules syntax.
 	 */
 	harmony?: boolean;
@@ -8386,6 +8391,7 @@ declare class NormalModule extends Module {
 		sourceMap?: any,
 		associatedObjectForCache?: Object
 	): Source;
+	setSourceMap(sourceMap: SourceMap, context: string): void;
 	markModuleAsErrored(error: WebpackError): void;
 	applyNoParseRule(rule?: any, content?: any): any;
 	shouldPreventParsing(noParseRule?: any, request?: any): any;
