@@ -6266,11 +6266,6 @@ declare interface JavascriptParserOptions {
 	exprContextRequest?: string;
 
 	/**
-	 * Enable/Disable extracting source map.
-	 */
-	extractSourceMap?: boolean;
-
-	/**
 	 * Enable/disable parsing of EcmaScript Modules syntax.
 	 */
 	harmony?: boolean;
@@ -7509,7 +7504,12 @@ declare interface MinChunkSizePluginOptions {
 	minChunkSize: number;
 }
 declare class Module extends DependenciesBlock {
-	constructor(type: string, context?: null | string, layer?: null | string);
+	constructor(
+		type: string,
+		context?: null | string,
+		layer?: null | string,
+		extractSourceMap?: boolean
+	);
 	type: string;
 	context: null | string;
 	layer: null | string;
@@ -7519,6 +7519,7 @@ declare class Module extends DependenciesBlock {
 	factoryMeta?: FactoryMeta;
 	useSourceMap: boolean;
 	useSimpleSourceMap: boolean;
+	extractSourceMap: boolean;
 	buildMeta?: BuildMeta;
 	buildInfo?: BuildInfo;
 	presentationalDependencies?: Dependency[];
@@ -8156,6 +8157,11 @@ declare interface ModuleSettings {
 	generator?: { [index: string]: any };
 
 	/**
+	 * Enable/Disable extracting source map.
+	 */
+	extractSourceMap?: boolean;
+
+	/**
 	 * Flags a module as with or without side effects.
 	 */
 	sideEffects?: boolean;
@@ -8420,6 +8426,11 @@ declare interface NormalModuleCreateData {
 	 * module type. When deserializing, this is set to an empty string "".
 	 */
 	type: "" | "javascript/auto" | "javascript/dynamic" | "javascript/esm";
+
+	/**
+	 * should try to extract source map
+	 */
+	extractSourceMap?: boolean;
 
 	/**
 	 * request string
@@ -10879,6 +10890,11 @@ declare interface RuleSetRule {
 		| ((value: string) => boolean)
 		| RuleSetLogicalConditionsAbsolute
 		| RuleSetConditionAbsolute[];
+
+	/**
+	 * Enable/Disable extracting source map.
+	 */
+	extractSourceMap?: boolean;
 
 	/**
 	 * The options for the module generator.
